@@ -1,0 +1,9 @@
+F:\MapPrime\CustomClient\MapPrimeSample\MapPrimeSample\bin\x86\Release\MapPrimeSample.exe.config
+F:\MapPrime\CustomClient\MapPrimeSample\MapPrimeSample\bin\x86\Release\MapPrimeSample.exe
+F:\MapPrime\CustomClient\MapPrimeSample\MapPrimeSample\bin\x86\Release\MapPrimeSample.pdb
+F:\MapPrime\CustomClient\MapPrimeSample\MapPrimeSample\obj\x86\Release\MapPrimeSample.csprojResolveAssemblyReference.cache
+F:\MapPrime\CustomClient\MapPrimeSample\MapPrimeSample\obj\x86\Release\MapPrimeSample.FormMain.resources
+F:\MapPrime\CustomClient\MapPrimeSample\MapPrimeSample\obj\x86\Release\MapPrimeSample.Properties.Resources.resources
+F:\MapPrime\CustomClient\MapPrimeSample\MapPrimeSample\obj\x86\Release\MapPrimeSample.csproj.GenerateResource.Cache
+F:\MapPrime\CustomClient\MapPrimeSample\MapPrimeSample\obj\x86\Release\MapPrimeSample.exe
+F:\MapPrime\CustomClient\MapPrimeSample\MapPrimeSample\obj\x86\Release\MapPrimeSample.pdb
