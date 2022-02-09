@@ -23,6 +23,94 @@ namespace MapPrimeSample
         private List<string> _identifyLayerIDList = new List<string>();
         private List<int> _identifyOIDList = new List<int>();
 
+      
+
+
+        public static Color ToColor(uint ucol)
+        {
+            Color fillColpre = Color.FromArgb((int)ucol);
+            return Color.FromArgb(255, fillColpre.B, fillColpre.G, fillColpre.R);
+        }
+
+        public static uint ToUintRgb(Color col)
+        {
+            Color colTmp = Color.FromArgb(0, col.B, col.G, col.R);
+            return (uint)colTmp.ToArgb();
+        }
+        public static Color GetRandomColor()
+        {
+            byte[] colorByte = new byte[3];
+            Random rand = new Random();
+            rand.NextBytes(colorByte);
+            Color randomColor = Color.FromArgb(255, colorByte[0], colorByte[1], colorByte[2]);
+            return randomColor;
+        }
+
+        public static uint GetRandomUintRgb()
+        {
+            Color colTmp = GetRandomColor();
+            return (uint)colTmp.ToArgb();
+        }
+
+        public static GDisplayLib.IFillSymbol CreateFillSymbol()
+        {
+            GDisplayLib.IFillSymbol sym = new GDisplayLib.FillSymbol();
+            sym.RGBColor = GetRandomUintRgb();
+            sym.Transparency = 255;
+            sym.Style = GDisplayLib.eFillStyle.eFillStyleBS_SOLID;
+            sym.LineSymbol.Style = GDisplayLib.eLineStyle.eLineStylePS_SOLID;
+            sym.LineSymbol.Transparency = 255;
+            sym.LineSymbol.RGBColor = GetRandomUintRgb();
+            sym.LineSymbol.Width = 1;
+            sym.LineSymbol.StartCapSize = 0;
+            sym.LineSymbol.EndCapSize = 0;
+            sym.LineSymbol.DashCapStyle = 0;
+            return sym;
+        }
+
+        public static GDisplayLib.ILineSymbol CreateLineSymbol()
+        {
+            GDisplayLib.ILineSymbol sym = new GDisplayLib.LineSymbol();
+            sym.RGBColor = GetRandomUintRgb();
+            sym.Transparency = 255;
+            sym.Style = GDisplayLib.eLineStyle.eLineStylePS_SOLID;
+            sym.Width = 1;
+            sym.StartCapSize = 0;
+            sym.EndCapSize = 0;
+            sym.DashCapStyle = 0;
+            return sym;
+        }
+
+        public static GDisplayLib.IPointSymbol CreatePointSymbol()
+        {
+            GDisplayLib.IPointSymbol sym = new GDisplayLib.PointSymbol();
+            sym.RGBColor = GetRandomUintRgb();
+            sym.Transparency = 255;
+            sym.Style = GDisplayLib.ePointStyle.ePointStyleCircle;
+            sym.Size = 10;
+            return sym;
+        }
+
+        public static GDisplayLib.ISymbol CreateSymbol(GLayerLib.IGeoFeatureLayer geoFeatureLayer)
+        {
+            if (geoFeatureLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypeMultiPolygon
+                    || geoFeatureLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypePolygon)
+            {
+                return CreateFillSymbol() as GDisplayLib.ISymbol;
+            }
+            else if (geoFeatureLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypeMultiLineString
+                    || geoFeatureLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypeLineString)
+            {
+                return CreateLineSymbol() as GDisplayLib.ISymbol;
+            }
+            else if (geoFeatureLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypeMultiPoint
+                    || geoFeatureLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypePoint)
+            {
+                return CreatePointSymbol() as GDisplayLib.ISymbol;
+            }
+            else
+                return null;
+        }
 
         public FormMain()
         {
@@ -56,8 +144,11 @@ namespace MapPrimeSample
             _measureArea = new GControlsLib.MeasureArea() as GCommonLib.IGCommand;
             _measureArea.OnCreate(this.axMapControl1.GetOcx());
 
-          
-    }
+
+       
+        }
+
+
 
         private void listBoxFeatureClass_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -69,9 +160,46 @@ namespace MapPrimeSample
 
         }
 
+        private GLayerLib.IGeoFeatureLayer gfLayer = null;
+        //레이어목록 배경색 변경
         private void listBoxTOC_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.listBoxTOC.BackColor = Color.White;
 
+            if (this.listBoxTOC.SelectedItems.Count == 1)
+            {
+                GLayerLib.ILayer layer = this.axMapControl1.get_Layer(this.listBoxTOC.SelectedIndex);
+                GLayerLib.IGeoFeatureLayer geoLayer = layer as GLayerLib.IGeoFeatureLayer;
+
+                gfLayer = geoLayer;
+
+                GLayerLib.ISimpleRenderer simpleRender = gfLayer.Renderer as GLayerLib.ISimpleRenderer;
+                if (simpleRender == null)
+                {
+                    simpleRender = new GLayerLib.SimpleRenderer();
+                    GDisplayLib.ISymbol crtSymbol = FormMain.CreateSymbol(gfLayer);
+                    simpleRender.Symbol["ISymbol"] = crtSymbol;
+                }
+
+                if (gfLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypeMultiPolygon
+                    || gfLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypePolygon)
+                {
+                    GDisplayLib.IFillSymbol symbol = simpleRender.Symbol["IFillSymbol"] as GDisplayLib.IFillSymbol;
+                    this.listBoxTOC.BackColor = FormMain.ToColor(symbol.LineSymbol.RGBColor);
+                }
+                else if (gfLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypeMultiLineString
+                    || gfLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypeLineString)
+                {
+                    GDisplayLib.ILineSymbol symbol = simpleRender.Symbol["ILineSymbol"] as GDisplayLib.ILineSymbol;
+                    this.listBoxTOC.BackColor = FormMain.ToColor(symbol.RGBColor);
+                }
+                else if (gfLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypeMultiPoint
+                        || gfLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypePoint)
+                {
+                    GDisplayLib.IPointSymbol symbol = simpleRender.Symbol["IPointSymbol"] as GDisplayLib.IPointSymbol;
+                    this.listBoxTOC.BackColor = FormMain.ToColor(symbol.RGBColor);
+                }
+            }
         }
 
         /*        private void listBoxTOC_DoubleClick(object sender, EventArgs e)
@@ -280,46 +408,19 @@ namespace MapPrimeSample
         {
             string className = this.listBoxShapeFileList.SelectedItem.ToString();
             GDataSourceLib.IDataSource dataSource = this.txtShapeFileDirectory.Tag as GDataSourceLib.IDataSource;
+            
             GDataSourceLib.IFeatureClass featureClass = openFeatureClass(dataSource, className);
+           
             string layerName = className;
             GLayerLib.IFeatureLayer featureLayer = createFeatureLayer(featureClass, layerName);
+            
             this.axMapControl1.AddLayer(featureLayer);
             this.axMapControl1.Refresh(GCommonLib.eViewDrawLayer.eViewDrawLayerAll);
+            
             refreshLayerList();
         }
 
-        private void listBoxIdentifyList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.txtProperty.Text = "";
-
-            if (this.listBoxIdentifyList.SelectedItem == null)
-                return;
-
-            int idx = this.listBoxIdentifyList.SelectedIndex;
-            string layerID = _identifyLayerIDList[idx];
-            int oid = _identifyOIDList[idx];
-
-            GLayerLib.IFeatureLayer featureLayer = GetLayer(layerID) as GLayerLib.IFeatureLayer;
-            if (featureLayer == null)
-                return;
-
-            GDataSourceLib.Feature feature = featureLayer.FeatureClass.GetFeature(oid);
-            if (feature == null)
-                return;
-
-            for (int c = 0; c < feature.Fields.FieldCount; c++)
-            {
-                if (feature.Fields.Field[c].Type == GDataSourceLib.eFieldType.eFieldTypeBlob
-                    || feature.Fields.Field[c].Type == GDataSourceLib.eFieldType.eFieldTypeGeometry)
-                    continue;
-
-                if (feature.Value[c] == null)
-                    continue;
-
-                string str = "[" + feature.Fields.Field[c].Name + "] " + feature.Value[c].ToString();
-                this.txtProperty.AppendText(str + "\r\n");
-            }
-        }
+       
 
         private void axMapControl_OnMouseUp(object sender, AxGMapLib.IMapControlEvents_OnMouseUpEvent e)
         {
@@ -429,18 +530,18 @@ namespace MapPrimeSample
             GDataSourceLib.IEnumFeature features = fSelection.SelectedFeatures;
             features.Reset();
             GDataSourceLib.Feature feature = features.Next();
+
+            for (int c = 0; c < feature.Fields.FieldCount; c++)
+            {
+                if (feature.Fields.Field[c].Type != GDataSourceLib.eFieldType.eFieldTypeBlob
+                    && feature.Fields.Field[c].Type != GDataSourceLib.eFieldType.eFieldTypeGeometry)
+                {
+                    this.dataGridView1.Columns.Add(feature.Fields.Field[c].Name, feature.Fields.Field[c].Name);
+                }
+            }
+
             while (feature != null)
             {
-
-                for (int c = 0; c < feature.Fields.FieldCount; c++)
-                {
-                    if (feature.Fields.Field[c].Type != GDataSourceLib.eFieldType.eFieldTypeBlob
-                        && feature.Fields.Field[c].Type != GDataSourceLib.eFieldType.eFieldTypeGeometry)
-                    {
-                        this.dataGridView1.Columns.Add(feature.Fields.Field[c].Name, feature.Fields.Field[c].Name);
-                    }
-                }
-
                 this.dataGridView1.Rows.Add(1);
                 for (int c = 0; c < feature.Fields.FieldCount; c++)
                 {
@@ -549,6 +650,65 @@ namespace MapPrimeSample
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void toolStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+      
+        private void Property_Click(object sender, EventArgs e)
+        {
+            if (this.listBoxTOC.SelectedItems.Count != 1)
+            {
+                MessageBox.Show("먼저, 레이어목록에서 한개의 레이어를 선택하세요.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            GLayerLib.ILayer layer = this.axMapControl1.get_Layer(this.listBoxTOC.SelectedIndex);
+            FormLayerProperty frmLayerProp = new FormLayerProperty(layer, this.axMapControl1);
+
+            frmLayerProp.ShowDialog(this);
+        }
+
+     
+        private void listBoxIdentifyList_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            this.txtProperty.Text = "";
+
+            if (this.listBoxIdentifyList.SelectedItem == null)
+                return;
+
+            int idx = this.listBoxIdentifyList.SelectedIndex;
+            string layerID = _identifyLayerIDList[idx];
+            int oid = _identifyOIDList[idx];
+
+            GLayerLib.IFeatureLayer featureLayer = GetLayer(layerID) as GLayerLib.IFeatureLayer;
+            if (featureLayer == null)
+                return;
+
+            GDataSourceLib.Feature feature = featureLayer.FeatureClass.GetFeature(oid);
+            if (feature == null)
+                return;
+
+            for (int c = 0; c < feature.Fields.FieldCount; c++)
+            {
+                if (feature.Fields.Field[c].Type == GDataSourceLib.eFieldType.eFieldTypeBlob
+                    || feature.Fields.Field[c].Type == GDataSourceLib.eFieldType.eFieldTypeGeometry)
+                    continue;
+
+                if (feature.Value[c] == null)
+                    continue;
+
+                string str = "[" + feature.Fields.Field[c].Name + "] " + feature.Value[c].ToString();
+                this.txtProperty.AppendText(str + "\r\n");
+            }
         }
     }
 }

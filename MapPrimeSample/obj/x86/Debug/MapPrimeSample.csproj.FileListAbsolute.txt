@@ -210,3 +210,10 @@ C:\work\MapPrimeSDKSample_1.2\MapPrimeSample\obj\x86\Debug\MapPrimeSample.csproj
 C:\work\MapPrimeSDKSample_1.2\MapPrimeSample\obj\x86\Debug\MapPrimeSample.csproj.CoreCompileInputs.cache
 C:\work\MapPrimeSDKSample_1.2\MapPrimeSample\obj\x86\Debug\MapPrimeSample.exe
 C:\work\MapPrimeSDKSample_1.2\MapPrimeSample\obj\x86\Debug\MapPrimeSample.pdb
+C:\work\MapPrimeSDKSample_1.2\MapPrimeSample\obj\x86\Debug\MapPrimeSample.FormLayerProperty.resources
+C:\work\MapPrimeSDKSample_1.2\MapPrimeSample\obj\x86\Debug\MapPrimeSample.FormFeatureLayerDefinition.resources
+C:\work\MapPrimeSDKSample_1.2\MapPrimeSample\obj\x86\Debug\MapPrimeSample.FormSimpleRenderer.resources
+C:\work\MapPrimeSDKSample_1.2\MapPrimeSample\obj\x86\Debug\MapPrimeSample.FormLayerShowSclae.resources
+C:\work\MapPrimeSDKSample_1.2\MapPrimeSample\obj\x86\Debug\MapPrimeSample.FormLabelRenderer.resources
+C:\work\MapPrimeSDKSample_1.2\MapPrimeSample\obj\x86\Debug\MapPrimeSample.FormFeatureClassLocale.resources
+C:\work\MapPrimeSDKSample_1.2\MapPrimeSample\obj\x86\Debug\MapPrimeSample.FormSpatialReference.resources

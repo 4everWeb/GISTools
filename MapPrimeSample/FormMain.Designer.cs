@@ -45,12 +45,14 @@
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolRefershLayerList = new System.Windows.Forms.ToolStripButton();
             this.toolRemoveAllLayer = new System.Windows.Forms.ToolStripButton();
+            this.Property = new System.Windows.Forms.ToolStripButton();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPageMapView = new System.Windows.Forms.TabPage();
             this.tabControl6 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
@@ -81,7 +83,6 @@
             this.toolCalculateDistance = new System.Windows.Forms.ToolStripButton();
             this.toolCalculateArea = new System.Windows.Forms.ToolStripButton();
             this.toolClearMap = new System.Windows.Forms.ToolStripButton();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -109,6 +110,7 @@
             this.tabPageMapView.SuspendLayout();
             this.tabControl6.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
@@ -123,7 +125,6 @@
             this.splitContainer6.Panel2.SuspendLayout();
             this.splitContainer6.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // axMapControl1
@@ -133,7 +134,7 @@
             this.axMapControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.axMapControl1.Name = "axMapControl1";
             this.axMapControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControl1.OcxState")));
-            this.axMapControl1.Size = new System.Drawing.Size(300, 260);
+            this.axMapControl1.Size = new System.Drawing.Size(300, 262);
             this.axMapControl1.TabIndex = 0;
             this.axMapControl1.OnMouseUp += new AxGMapLib.IMapControlEvents_OnMouseUpEventHandler(this.axMapControl_OnMouseUp);
             // 
@@ -303,12 +304,14 @@
             this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolRefershLayerList,
-            this.toolRemoveAllLayer});
+            this.toolRemoveAllLayer,
+            this.Property});
             this.toolStrip2.Location = new System.Drawing.Point(3, 2);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(322, 27);
             this.toolStrip2.TabIndex = 1;
             this.toolStrip2.Text = "toolStrip2";
+            this.toolStrip2.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip2_ItemClicked);
             // 
             // toolRefershLayerList
             // 
@@ -327,6 +330,15 @@
             this.toolRemoveAllLayer.Size = new System.Drawing.Size(88, 24);
             this.toolRemoveAllLayer.Text = "RemoveAll";
             this.toolRemoveAllLayer.Click += new System.EventHandler(this.toolRemoveAllLayer_Click);
+            // 
+            // Property
+            // 
+            this.Property.Image = ((System.Drawing.Image)(resources.GetObject("Property.Image")));
+            this.Property.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Property.Name = "Property";
+            this.Property.Size = new System.Drawing.Size(76, 24);
+            this.Property.Text = "Property";
+            this.Property.Click += new System.EventHandler(this.Property_Click);
             // 
             // splitContainer3
             // 
@@ -366,7 +378,7 @@
             // 
             this.splitContainer5.Panel2.Controls.Add(this.tabControl6);
             this.splitContainer5.Size = new System.Drawing.Size(316, 443);
-            this.splitContainer5.SplitterDistance = 292;
+            this.splitContainer5.SplitterDistance = 294;
             this.splitContainer5.SplitterWidth = 3;
             this.splitContainer5.TabIndex = 2;
             // 
@@ -378,7 +390,7 @@
             this.tabControl3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(314, 290);
+            this.tabControl3.Size = new System.Drawing.Size(314, 292);
             this.tabControl3.TabIndex = 1;
             // 
             // tabPageMapView
@@ -388,7 +400,7 @@
             this.tabPageMapView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageMapView.Name = "tabPageMapView";
             this.tabPageMapView.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPageMapView.Size = new System.Drawing.Size(306, 264);
+            this.tabPageMapView.Size = new System.Drawing.Size(306, 266);
             this.tabPageMapView.TabIndex = 1;
             this.tabPageMapView.Text = "지도화면";
             this.tabPageMapView.UseVisualStyleBackColor = true;
@@ -401,7 +413,7 @@
             this.tabControl6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl6.Name = "tabControl6";
             this.tabControl6.SelectedIndex = 0;
-            this.tabControl6.Size = new System.Drawing.Size(314, 146);
+            this.tabControl6.Size = new System.Drawing.Size(314, 144);
             this.tabControl6.TabIndex = 0;
             // 
             // tabPage4
@@ -411,10 +423,24 @@
             this.tabPage4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage4.Size = new System.Drawing.Size(306, 120);
+            this.tabPage4.Size = new System.Drawing.Size(306, 118);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "선택 객체";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 2);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(300, 114);
+            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // splitContainer4
             // 
@@ -625,6 +651,7 @@
             this.listBoxIdentifyList.Name = "listBoxIdentifyList";
             this.listBoxIdentifyList.Size = new System.Drawing.Size(152, 155);
             this.listBoxIdentifyList.TabIndex = 0;
+            this.listBoxIdentifyList.SelectedIndexChanged += new System.EventHandler(this.listBoxIdentifyList_SelectedIndexChanged_1);
             // 
             // txtProperty
             // 
@@ -747,20 +774,6 @@
             this.toolClearMap.Text = "화면지우기";
             this.toolClearMap.Click += new System.EventHandler(this.toolClearMap_Click);
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 2);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(300, 116);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -802,6 +815,7 @@
             this.tabPageMapView.ResumeLayout(false);
             this.tabControl6.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.splitContainer4.Panel1.ResumeLayout(false);
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
@@ -819,7 +833,6 @@
             this.splitContainer6.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -880,5 +893,6 @@
         private System.Windows.Forms.ListBox listBoxIdentifyList;
         private System.Windows.Forms.TextBox txtProperty;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ToolStripButton Property;
     }
 }

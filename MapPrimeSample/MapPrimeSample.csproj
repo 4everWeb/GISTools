@@ -87,16 +87,79 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormFeatureLayerDefinition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFeatureLayerDefinition.Designer.cs">
+      <DependentUpon>FormFeatureLayerDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormFeatureLayerLocale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFeatureLayerLocale.Designer.cs">
+      <DependentUpon>FormFeatureLayerLocale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLabel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLabel.Designer.cs">
+      <DependentUpon>FormLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLayerProperty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLayerProperty.Designer.cs">
+      <DependentUpon>FormLayerProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLayerShowSclae.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLayerShowSclae.Designer.cs">
+      <DependentUpon>FormLayerShowSclae.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSimpleRenderer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSimpleRenderer.Designer.cs">
+      <DependentUpon>FormSimpleRenderer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSpatialReference.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSpatialReference.Designer.cs">
+      <DependentUpon>FormSpatialReference.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormFeatureLayerDefinition.resx">
+      <DependentUpon>FormFeatureLayerDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFeatureLayerLocale.resx">
+      <DependentUpon>FormFeatureLayerLocale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLabel.resx">
+      <DependentUpon>FormLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLayerProperty.resx">
+      <DependentUpon>FormLayerProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLayerShowSclae.resx">
+      <DependentUpon>FormLayerShowSclae.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSimpleRenderer.resx">
+      <DependentUpon>FormSimpleRenderer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSpatialReference.resx">
+      <DependentUpon>FormSpatialReference.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
