@@ -20,11 +20,18 @@ namespace MapPrimeSample
         private GCommonLib.IGCommand _measureDistance;
         private GCommonLib.IGCommand _measureArea;
 
+        private GCommonLib.IGCommand _editNewPointTool;     //포인트 그리기
+        private GCommonLib.IGCommand _editNewLineTool;      //라인 그리기
+        private GCommonLib.IGCommand _editNewPolygonTool;   //폴리곤 그리기
+        private GCommonLib.IGCommand _editSelectFeatureTool; //편집객체선택
+
         private List<string> _identifyLayerIDList = new List<string>();
         private List<int> _identifyOIDList = new List<int>();
 
-      
+        public static GControlsLib.IEngineEditor EngineEditor;
+        public static GDataSourceLib.IEngineOperationStack EngineOperationStack;
 
+    
 
         public static Color ToColor(uint ucol)
         {
@@ -144,11 +151,31 @@ namespace MapPrimeSample
             _measureArea = new GControlsLib.MeasureArea() as GCommonLib.IGCommand;
             _measureArea.OnCreate(this.axMapControl1.GetOcx());
 
+            //포인트 그리기
+            _editNewPointTool = new GControlsLib.EditNewPointTool() as GCommonLib.IGCommand;
+            _editNewPointTool.OnCreate(this.axMapControl1.GetOcx());
 
-       
+            //라인 그리기
+            _editNewLineTool = new GControlsLib.EditNewLineTool() as GCommonLib.IGCommand;
+            _editNewLineTool.OnCreate(this.axMapControl1.GetOcx());
+
+            //폴리곤 그리기
+            _editNewPolygonTool = new GControlsLib.EditNewPolygonTool() as GCommonLib.IGCommand;
+            _editNewPolygonTool.OnCreate(this.axMapControl1.GetOcx());
+
+            //편집객체 선택
+            _editSelectFeatureTool = new GControlsLib.EditSelectFeatureTool() as GCommonLib.IGCommand;
+            _editSelectFeatureTool.OnCreate(this.axMapControl1.GetOcx());
+
+            //엔진에디터
+            FormMain.EngineEditor = new GControlsLib.EngineEditor();
+            GCommonLib.IExtension ipExtension = (GCommonLib.IExtension)FormMain.EngineEditor;
+            ipExtension.Startup(this.axMapControl1.GetOcx());
+            GCommonLib.ExtensionManager ipExtensionManager = new GCommonLib.ExtensionManager();
+            ipExtensionManager.AddExtension("GControls.EngineEditor", (GCommonLib.Extension)ipExtension);
+            this.axMapControl1.ExtensionManager = ipExtensionManager;
+
         }
-
-
 
         private void listBoxFeatureClass_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -450,10 +477,6 @@ namespace MapPrimeSample
             }
         }
 
- 
-
-
-
         private void outputIdentify()
         {
             this.listBoxIdentifyList.Items.Clear();
@@ -497,7 +520,6 @@ namespace MapPrimeSample
             }
             return null;
         }
-
 
         //선택된 레이어를 반환
         public GLayerLib.IFeatureLayer GetSelectedLayer()
@@ -710,5 +732,152 @@ namespace MapPrimeSample
                 this.txtProperty.AppendText(str + "\r\n");
             }
         }
+
+        private void toolEditAttribute_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolEditStart_Click(object sender, EventArgs e)
+        {
+            if (FormMain.EngineEditor.EditState == GControlsLib.EngineEditState.eEngineStateEditing)
+            {
+                string errmsg = "기존 편집을 먼저 종료해주세요.";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (this.txtShapeFileDirectory.Tag == null)
+            {
+                string errmsg = "Shape 파일 디렉토리를 선택을 해주세요.";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            GDataSourceLib.IDataSource dataSource = this.txtShapeFileDirectory.Tag as GDataSourceLib.IDataSource;
+            FormMain.EngineEditor.StartEditing(dataSource, this.axMapControl1.GetOcx() as GMapLib.MapControl);
+            FormMain.EngineEditor.StartOperation();
+            FormMain.EngineOperationStack = dataSource as GDataSourceLib.IEngineOperationStack;
+        }
+
+        private void toolEditStopSave_Click(object sender, EventArgs e)
+        {
+            if (FormMain.EngineEditor.EditState != GControlsLib.EngineEditState.eEngineStateEditing)
+            {
+                string errmsg = "편집 상태가 아닙니다. ";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            FormMain.EngineEditor.StopOperation("");
+            FormMain.EngineEditor.StopEditing(true);
+            FormMain.EngineOperationStack.Reset();
+            this.axMapControl1.Refresh(GCommonLib.eViewDrawLayer.eViewDrawLayerAll);
+        }
+
+        private void toolEditStopCancel_Click(object sender, EventArgs e)
+        {
+            if (FormMain.EngineEditor.EditState != GControlsLib.EngineEditState.eEngineStateEditing)
+            {
+                string errmsg = "편집 상태가 아닙니다. ";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            FormMain.EngineEditor.StopOperation("");
+            FormMain.EngineEditor.StopEditing(false);
+            FormMain.EngineOperationStack.Reset();
+            System.Threading.Thread.Sleep(1000);
+            this.axMapControl1.Refresh(GCommonLib.eViewDrawLayer.eViewDrawLayerAll);
+        }
+
+        private void toolAddObject_Click_1(object sender, EventArgs e)
+        {
+            if (FormMain.EngineEditor.EditState != GControlsLib.EngineEditState.eEngineStateEditing)
+            {
+                string errmsg = "편집 상태가 아닙니다. ";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (this.listBoxTOC.SelectedItems.Count != 1)
+            {
+                MessageBox.Show("먼저, 레이어목록에서 한개의 레이어를 선택하세요.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            GLayerLib.ILayer layer = this.axMapControl1.get_Layer(this.listBoxTOC.SelectedIndex);
+
+            GControlsLib.IEngineEditLayers editLayers = FormMain.EngineEditor as GControlsLib.IEngineEditLayers;
+            editLayers.TargetLayer = layer as GLayerLib.FeatureLayer;
+
+            GControlsLib.IEngineEditTask task = FormMain.EngineEditor.GetTaskByUniqueName("Custom.EditorInsertObjectTask");
+            if (task == null)
+            {
+                task = new EditorInsertObjectTask() as GControlsLib.IEngineEditTask;
+                FormMain.EngineEditor.AddTask(task);
+            }
+            FormMain.EngineEditor.CurrentTask = task;
+
+            if (editLayers.TargetLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypePoint
+                        || editLayers.TargetLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypeMultiPoint)
+            {
+                this.axMapControl1.CurrentTool = _editNewPointTool as GCommonLib.Tool;
+            }
+            else if (editLayers.TargetLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypeLineString
+                || editLayers.TargetLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypeMultiLineString)
+            {
+                this.axMapControl1.CurrentTool = _editNewLineTool as GCommonLib.Tool;
+            }
+            else if (editLayers.TargetLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypePolygon
+                || editLayers.TargetLayer.FeatureClass.GeometryType == GGeometryLib.eGeometryType.eGeometryTypeMultiPolygon)
+            {
+                this.axMapControl1.CurrentTool = _editNewPolygonTool as GCommonLib.Tool;
+            }
+        }
+
+        private void toolDeleteObjects_Click(object sender, EventArgs e)
+        {
+            if (FormMain.EngineEditor.EditState != GControlsLib.EngineEditState.eEngineStateEditing)
+            {
+                string errmsg = "편집 상태가 아닙니다. ";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            GLayerLib.IFeatureLayer selectedFeatureLayer = GetSelectedLayer() as GLayerLib.IFeatureLayer;
+            if (selectedFeatureLayer == null)
+            {
+                string errmsg = "선택된 객체가 없습니다. ";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            GLayerLib.IFeatureSelection featureSelection = selectedFeatureLayer as GLayerLib.IFeatureSelection;
+            
+
+            GDataSourceLib.IEnumFeature features = featureSelection.SelectedFeatures;
+
+            features.Reset();
+            GDataSourceLib.Feature feature = features.Next();
+
+            string grpID;
+            FormMain.EngineOperationStack.StartGroup("Delete", out grpID);
+
+            while (feature != null)
+            {
+                feature.Delete();
+                feature = features.Next();
+            }
+
+            FormMain.EngineOperationStack.StopGroup();
+
+            featureSelection.Selection.Clear();
+            this.axMapControl1.Refresh(GCommonLib.eViewDrawLayer.eViewDrawLayerAll);
+
+        }
+
     }
 }
+
+

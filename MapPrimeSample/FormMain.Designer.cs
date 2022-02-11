@@ -83,6 +83,16 @@
             this.toolCalculateDistance = new System.Windows.Forms.ToolStripButton();
             this.toolCalculateArea = new System.Windows.Forms.ToolStripButton();
             this.toolClearMap = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.toolEditStart = new System.Windows.Forms.ToolStripButton();
+            this.toolEditStopSave = new System.Windows.Forms.ToolStripButton();
+            this.toolEditStopCancel = new System.Windows.Forms.ToolStripButton();
+            this.toolAddObject = new System.Windows.Forms.ToolStripButton();
+            this.toolEditSelection = new System.Windows.Forms.ToolStripButton();
+            this.toolSplitObject = new System.Windows.Forms.ToolStripButton();
+            this.toolMergeObject = new System.Windows.Forms.ToolStripButton();
+            this.toolEditAttribute = new System.Windows.Forms.ToolStripButton();
+            this.toolDeleteObjects = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -125,6 +135,7 @@
             this.splitContainer6.Panel2.SuspendLayout();
             this.splitContainer6.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
             // axMapControl1
@@ -134,17 +145,17 @@
             this.axMapControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.axMapControl1.Name = "axMapControl1";
             this.axMapControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControl1.OcxState")));
-            this.axMapControl1.Size = new System.Drawing.Size(300, 262);
+            this.axMapControl1.Size = new System.Drawing.Size(363, 576);
             this.axMapControl1.TabIndex = 0;
             this.axMapControl1.OnMouseUp += new AxGMapLib.IMapControlEvents_OnMouseUpEventHandler(this.axMapControl_OnMouseUp);
             // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Location = new System.Drawing.Point(0, 470);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 783);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1014, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1077, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -164,7 +175,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer1.Size = new System.Drawing.Size(1014, 443);
+            this.splitContainer1.Size = new System.Drawing.Size(1077, 756);
             this.splitContainer1.SplitterDistance = 338;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -185,7 +196,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.tabControl2);
-            this.splitContainer2.Size = new System.Drawing.Size(338, 443);
+            this.splitContainer2.Size = new System.Drawing.Size(338, 756);
             this.splitContainer2.SplitterDistance = 264;
             this.splitContainer2.SplitterWidth = 3;
             this.splitContainer2.TabIndex = 4;
@@ -270,7 +281,7 @@
             this.tabControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(336, 174);
+            this.tabControl2.Size = new System.Drawing.Size(336, 487);
             this.tabControl2.TabIndex = 3;
             // 
             // tabPage2
@@ -281,7 +292,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(328, 148);
+            this.tabPage2.Size = new System.Drawing.Size(328, 461);
             this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "레이어목록";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -294,7 +305,7 @@
             this.listBoxTOC.Location = new System.Drawing.Point(3, 29);
             this.listBoxTOC.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBoxTOC.Name = "listBoxTOC";
-            this.listBoxTOC.Size = new System.Drawing.Size(322, 117);
+            this.listBoxTOC.Size = new System.Drawing.Size(322, 430);
             this.listBoxTOC.TabIndex = 0;
             this.listBoxTOC.SelectedIndexChanged += new System.EventHandler(this.listBoxTOC_SelectedIndexChanged);
             this.listBoxTOC.DoubleClick += new System.EventHandler(this.listBoxTOC_DoubleClick);
@@ -356,8 +367,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer3.Size = new System.Drawing.Size(672, 443);
-            this.splitContainer3.SplitterDistance = 316;
+            this.splitContainer3.Size = new System.Drawing.Size(735, 756);
+            this.splitContainer3.SplitterDistance = 379;
             this.splitContainer3.TabIndex = 1;
             // 
             // splitContainer5
@@ -377,8 +388,8 @@
             // splitContainer5.Panel2
             // 
             this.splitContainer5.Panel2.Controls.Add(this.tabControl6);
-            this.splitContainer5.Size = new System.Drawing.Size(316, 443);
-            this.splitContainer5.SplitterDistance = 294;
+            this.splitContainer5.Size = new System.Drawing.Size(379, 756);
+            this.splitContainer5.SplitterDistance = 608;
             this.splitContainer5.SplitterWidth = 3;
             this.splitContainer5.TabIndex = 2;
             // 
@@ -390,7 +401,7 @@
             this.tabControl3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(314, 292);
+            this.tabControl3.Size = new System.Drawing.Size(377, 606);
             this.tabControl3.TabIndex = 1;
             // 
             // tabPageMapView
@@ -400,7 +411,7 @@
             this.tabPageMapView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageMapView.Name = "tabPageMapView";
             this.tabPageMapView.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPageMapView.Size = new System.Drawing.Size(306, 266);
+            this.tabPageMapView.Size = new System.Drawing.Size(369, 580);
             this.tabPageMapView.TabIndex = 1;
             this.tabPageMapView.Text = "지도화면";
             this.tabPageMapView.UseVisualStyleBackColor = true;
@@ -413,7 +424,7 @@
             this.tabControl6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl6.Name = "tabControl6";
             this.tabControl6.SelectedIndex = 0;
-            this.tabControl6.Size = new System.Drawing.Size(314, 144);
+            this.tabControl6.Size = new System.Drawing.Size(377, 143);
             this.tabControl6.TabIndex = 0;
             // 
             // tabPage4
@@ -423,7 +434,7 @@
             this.tabPage4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage4.Size = new System.Drawing.Size(306, 118);
+            this.tabPage4.Size = new System.Drawing.Size(369, 117);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "선택 객체";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -438,7 +449,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(300, 114);
+            this.dataGridView1.Size = new System.Drawing.Size(363, 113);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -459,7 +470,7 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.tabControl5);
-            this.splitContainer4.Size = new System.Drawing.Size(352, 443);
+            this.splitContainer4.Size = new System.Drawing.Size(352, 756);
             this.splitContainer4.SplitterDistance = 251;
             this.splitContainer4.SplitterWidth = 3;
             this.splitContainer4.TabIndex = 0;
@@ -607,7 +618,7 @@
             this.tabControl5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl5.Name = "tabControl5";
             this.tabControl5.SelectedIndex = 0;
-            this.tabControl5.Size = new System.Drawing.Size(350, 187);
+            this.tabControl5.Size = new System.Drawing.Size(350, 500);
             this.tabControl5.TabIndex = 1;
             // 
             // tabPage7
@@ -617,7 +628,7 @@
             this.tabPage7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage7.Size = new System.Drawing.Size(342, 161);
+            this.tabPage7.Size = new System.Drawing.Size(342, 474);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "객체정보";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -637,7 +648,7 @@
             // splitContainer6.Panel2
             // 
             this.splitContainer6.Panel2.Controls.Add(this.txtProperty);
-            this.splitContainer6.Size = new System.Drawing.Size(336, 157);
+            this.splitContainer6.Size = new System.Drawing.Size(336, 470);
             this.splitContainer6.SplitterDistance = 154;
             this.splitContainer6.TabIndex = 1;
             // 
@@ -649,7 +660,7 @@
             this.listBoxIdentifyList.Location = new System.Drawing.Point(0, 0);
             this.listBoxIdentifyList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBoxIdentifyList.Name = "listBoxIdentifyList";
-            this.listBoxIdentifyList.Size = new System.Drawing.Size(152, 155);
+            this.listBoxIdentifyList.Size = new System.Drawing.Size(152, 468);
             this.listBoxIdentifyList.TabIndex = 0;
             this.listBoxIdentifyList.SelectedIndexChanged += new System.EventHandler(this.listBoxIdentifyList_SelectedIndexChanged_1);
             // 
@@ -661,7 +672,7 @@
             this.txtProperty.Multiline = true;
             this.txtProperty.Name = "txtProperty";
             this.txtProperty.ReadOnly = true;
-            this.txtProperty.Size = new System.Drawing.Size(176, 155);
+            this.txtProperty.Size = new System.Drawing.Size(176, 468);
             this.txtProperty.TabIndex = 11;
             // 
             // toolStrip1
@@ -680,7 +691,7 @@
             this.toolClearMap});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1014, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1077, 27);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -774,11 +785,109 @@
             this.toolClearMap.Text = "화면지우기";
             this.toolClearMap.Click += new System.EventHandler(this.toolClearMap_Click);
             // 
+            // toolStrip3
+            // 
+            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolEditStart,
+            this.toolEditStopSave,
+            this.toolEditStopCancel,
+            this.toolAddObject,
+            this.toolEditSelection,
+            this.toolSplitObject,
+            this.toolMergeObject,
+            this.toolEditAttribute,
+            this.toolDeleteObjects});
+            this.toolStrip3.Location = new System.Drawing.Point(0, 27);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.Size = new System.Drawing.Size(1077, 27);
+            this.toolStrip3.TabIndex = 4;
+            this.toolStrip3.Text = "toolStrip3";
+            // 
+            // toolEditStart
+            // 
+            this.toolEditStart.Image = ((System.Drawing.Image)(resources.GetObject("toolEditStart.Image")));
+            this.toolEditStart.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolEditStart.Name = "toolEditStart";
+            this.toolEditStart.Size = new System.Drawing.Size(135, 24);
+            this.toolEditStart.Text = "편집시작(디렉토리)";
+            this.toolEditStart.Click += new System.EventHandler(this.toolEditStart_Click);
+            // 
+            // toolEditStopSave
+            // 
+            this.toolEditStopSave.Image = ((System.Drawing.Image)(resources.GetObject("toolEditStopSave.Image")));
+            this.toolEditStopSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolEditStopSave.Name = "toolEditStopSave";
+            this.toolEditStopSave.Size = new System.Drawing.Size(111, 24);
+            this.toolEditStopSave.Text = "편집종료(저장)";
+            this.toolEditStopSave.Click += new System.EventHandler(this.toolEditStopSave_Click);
+            // 
+            // toolEditStopCancel
+            // 
+            this.toolEditStopCancel.Image = ((System.Drawing.Image)(resources.GetObject("toolEditStopCancel.Image")));
+            this.toolEditStopCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolEditStopCancel.Name = "toolEditStopCancel";
+            this.toolEditStopCancel.Size = new System.Drawing.Size(111, 24);
+            this.toolEditStopCancel.Text = "편집종료(취소)";
+            this.toolEditStopCancel.Click += new System.EventHandler(this.toolEditStopCancel_Click);
+            // 
+            // toolAddObject
+            // 
+            this.toolAddObject.Image = ((System.Drawing.Image)(resources.GetObject("toolAddObject.Image")));
+            this.toolAddObject.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolAddObject.Name = "toolAddObject";
+            this.toolAddObject.Size = new System.Drawing.Size(79, 24);
+            this.toolAddObject.Text = "객체추가";
+            this.toolAddObject.Click += new System.EventHandler(this.toolAddObject_Click_1);
+            // 
+            // toolEditSelection
+            // 
+            this.toolEditSelection.Image = ((System.Drawing.Image)(resources.GetObject("toolEditSelection.Image")));
+            this.toolEditSelection.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolEditSelection.Name = "toolEditSelection";
+            this.toolEditSelection.Size = new System.Drawing.Size(111, 24);
+            this.toolEditSelection.Text = "객체선택(편집)";
+            // 
+            // toolSplitObject
+            // 
+            this.toolSplitObject.Image = ((System.Drawing.Image)(resources.GetObject("toolSplitObject.Image")));
+            this.toolSplitObject.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolSplitObject.Name = "toolSplitObject";
+            this.toolSplitObject.Size = new System.Drawing.Size(79, 24);
+            this.toolSplitObject.Text = "객체분할";
+            // 
+            // toolMergeObject
+            // 
+            this.toolMergeObject.Image = ((System.Drawing.Image)(resources.GetObject("toolMergeObject.Image")));
+            this.toolMergeObject.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolMergeObject.Name = "toolMergeObject";
+            this.toolMergeObject.Size = new System.Drawing.Size(79, 24);
+            this.toolMergeObject.Text = "객체병합";
+            // 
+            // toolEditAttribute
+            // 
+            this.toolEditAttribute.Image = ((System.Drawing.Image)(resources.GetObject("toolEditAttribute.Image")));
+            this.toolEditAttribute.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolEditAttribute.Name = "toolEditAttribute";
+            this.toolEditAttribute.Size = new System.Drawing.Size(79, 24);
+            this.toolEditAttribute.Text = "속성편집";
+            this.toolEditAttribute.Click += new System.EventHandler(this.toolEditAttribute_Click);
+            // 
+            // toolDeleteObjects
+            // 
+            this.toolDeleteObjects.Image = ((System.Drawing.Image)(resources.GetObject("toolDeleteObjects.Image")));
+            this.toolDeleteObjects.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolDeleteObjects.Name = "toolDeleteObjects";
+            this.toolDeleteObjects.Size = new System.Drawing.Size(79, 24);
+            this.toolDeleteObjects.Text = "객체삭제";
+            this.toolDeleteObjects.Click += new System.EventHandler(this.toolDeleteObjects_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1014, 492);
+            this.ClientSize = new System.Drawing.Size(1077, 805);
+            this.Controls.Add(this.toolStrip3);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
@@ -833,6 +942,8 @@
             this.splitContainer6.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.toolStrip3.ResumeLayout(false);
+            this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -894,5 +1005,15 @@
         private System.Windows.Forms.TextBox txtProperty;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ToolStripButton Property;
+        private System.Windows.Forms.ToolStrip toolStrip3;
+        private System.Windows.Forms.ToolStripButton toolEditStart;
+        private System.Windows.Forms.ToolStripButton toolEditStopSave;
+        private System.Windows.Forms.ToolStripButton toolEditStopCancel;
+        private System.Windows.Forms.ToolStripButton toolAddObject;
+        private System.Windows.Forms.ToolStripButton toolEditSelection;
+        private System.Windows.Forms.ToolStripButton toolSplitObject;
+        private System.Windows.Forms.ToolStripButton toolMergeObject;
+        private System.Windows.Forms.ToolStripButton toolEditAttribute;
+        private System.Windows.Forms.ToolStripButton toolDeleteObjects;
     }
 }

@@ -30,32 +30,32 @@ namespace MapPrimeSample
         private void InitializeComponent()
         {
             this.grpSimpleRenderer = new System.Windows.Forms.GroupBox();
-            this.grpFillSymbol = new System.Windows.Forms.GroupBox();
-            this.grpLineSymbol = new System.Windows.Forms.GroupBox();
             this.grpPointSymbol = new System.Windows.Forms.GroupBox();
-            this.btnApplySimpleRenderer = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.txtPointSymbolStyle = new System.Windows.Forms.TextBox();
+            this.txtPointSize = new System.Windows.Forms.TextBox();
+            this.btnPointColor = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.btnFillColor = new System.Windows.Forms.Button();
-            this.btnLineColor = new System.Windows.Forms.Button();
-            this.btnPointColor = new System.Windows.Forms.Button();
-            this.txtFillSymbolTransparency = new System.Windows.Forms.TextBox();
-            this.txtLineWidth = new System.Windows.Forms.TextBox();
-            this.txtPointSize = new System.Windows.Forms.TextBox();
-            this.txtPointSymbolStyle = new System.Windows.Forms.TextBox();
+            this.grpLineSymbol = new System.Windows.Forms.GroupBox();
             this.txtLineSymbolStyle = new System.Windows.Forms.TextBox();
+            this.txtLineWidth = new System.Windows.Forms.TextBox();
+            this.btnLineColor = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.grpFillSymbol = new System.Windows.Forms.GroupBox();
             this.txtFillSymbolStyle = new System.Windows.Forms.TextBox();
+            this.txtFillSymbolTransparency = new System.Windows.Forms.TextBox();
+            this.btnFillColor = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnApplySimpleRenderer = new System.Windows.Forms.Button();
             this.grpSimpleRenderer.SuspendLayout();
-            this.grpFillSymbol.SuspendLayout();
-            this.grpLineSymbol.SuspendLayout();
             this.grpPointSymbol.SuspendLayout();
+            this.grpLineSymbol.SuspendLayout();
+            this.grpFillSymbol.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpSimpleRenderer
@@ -69,37 +69,6 @@ namespace MapPrimeSample
             this.grpSimpleRenderer.TabIndex = 0;
             this.grpSimpleRenderer.TabStop = false;
             this.grpSimpleRenderer.Text = "Simple Renderer";
-            // 
-            // grpFillSymbol
-            // 
-            this.grpFillSymbol.Controls.Add(this.txtFillSymbolStyle);
-            this.grpFillSymbol.Controls.Add(this.txtFillSymbolTransparency);
-            this.grpFillSymbol.Controls.Add(this.btnFillColor);
-            this.grpFillSymbol.Controls.Add(this.label3);
-            this.grpFillSymbol.Controls.Add(this.label2);
-            this.grpFillSymbol.Controls.Add(this.label1);
-            this.grpFillSymbol.Location = new System.Drawing.Point(34, 34);
-            this.grpFillSymbol.Name = "grpFillSymbol";
-            this.grpFillSymbol.Size = new System.Drawing.Size(559, 53);
-            this.grpFillSymbol.TabIndex = 0;
-            this.grpFillSymbol.TabStop = false;
-            this.grpFillSymbol.Text = "Fill Symbol";
-            // 
-            // grpLineSymbol
-            // 
-            this.grpLineSymbol.Controls.Add(this.txtLineSymbolStyle);
-            this.grpLineSymbol.Controls.Add(this.txtLineWidth);
-            this.grpLineSymbol.Controls.Add(this.btnLineColor);
-            this.grpLineSymbol.Controls.Add(this.label4);
-            this.grpLineSymbol.Controls.Add(this.label5);
-            this.grpLineSymbol.Controls.Add(this.label6);
-            this.grpLineSymbol.Location = new System.Drawing.Point(34, 105);
-            this.grpLineSymbol.Name = "grpLineSymbol";
-            this.grpLineSymbol.Size = new System.Drawing.Size(559, 53);
-            this.grpLineSymbol.TabIndex = 1;
-            this.grpLineSymbol.TabStop = false;
-            this.grpLineSymbol.Text = "Line Symbol";
-            this.grpLineSymbol.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // grpPointSymbol
             // 
@@ -116,69 +85,28 @@ namespace MapPrimeSample
             this.grpPointSymbol.TabStop = false;
             this.grpPointSymbol.Text = "Point Symbol";
             // 
-            // btnApplySimpleRenderer
+            // txtPointSymbolStyle
             // 
-            this.btnApplySimpleRenderer.Location = new System.Drawing.Point(462, 268);
-            this.btnApplySimpleRenderer.Name = "btnApplySimpleRenderer";
-            this.btnApplySimpleRenderer.Size = new System.Drawing.Size(180, 34);
-            this.btnApplySimpleRenderer.TabIndex = 3;
-            this.btnApplySimpleRenderer.Text = "Apply Simple Renderer";
-            this.btnApplySimpleRenderer.UseVisualStyleBackColor = true;
-            this.btnApplySimpleRenderer.Click += new System.EventHandler(this.btnApplySimpleRenderer_Click);
+            this.txtPointSymbolStyle.Location = new System.Drawing.Point(376, 22);
+            this.txtPointSymbolStyle.Name = "txtPointSymbolStyle";
+            this.txtPointSymbolStyle.Size = new System.Drawing.Size(177, 21);
+            this.txtPointSymbolStyle.TabIndex = 8;
             // 
-            // label1
+            // txtPointSize
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Color";
+            this.txtPointSize.Location = new System.Drawing.Point(259, 21);
+            this.txtPointSize.Name = "txtPointSize";
+            this.txtPointSize.Size = new System.Drawing.Size(49, 21);
+            this.txtPointSize.TabIndex = 7;
             // 
-            // label2
+            // btnPointColor
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(156, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Transparency";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(337, 26);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(33, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Style";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(337, 27);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(33, 12);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Style";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(205, 27);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 12);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Width";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(27, 27);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 12);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "Color";
+            this.btnPointColor.Location = new System.Drawing.Point(84, 22);
+            this.btnPointColor.Name = "btnPointColor";
+            this.btnPointColor.Size = new System.Drawing.Size(52, 20);
+            this.btnPointColor.TabIndex = 6;
+            this.btnPointColor.UseVisualStyleBackColor = true;
+            this.btnPointColor.Click += new System.EventHandler(this.btnPointColor_Click_1);
             // 
             // label7
             // 
@@ -207,6 +135,101 @@ namespace MapPrimeSample
             this.label9.TabIndex = 3;
             this.label9.Text = "Color";
             // 
+            // grpLineSymbol
+            // 
+            this.grpLineSymbol.Controls.Add(this.txtLineSymbolStyle);
+            this.grpLineSymbol.Controls.Add(this.txtLineWidth);
+            this.grpLineSymbol.Controls.Add(this.btnLineColor);
+            this.grpLineSymbol.Controls.Add(this.label4);
+            this.grpLineSymbol.Controls.Add(this.label5);
+            this.grpLineSymbol.Controls.Add(this.label6);
+            this.grpLineSymbol.Location = new System.Drawing.Point(34, 105);
+            this.grpLineSymbol.Name = "grpLineSymbol";
+            this.grpLineSymbol.Size = new System.Drawing.Size(559, 53);
+            this.grpLineSymbol.TabIndex = 1;
+            this.grpLineSymbol.TabStop = false;
+            this.grpLineSymbol.Text = "Line Symbol";
+            this.grpLineSymbol.Enter += new System.EventHandler(this.groupBox3_Enter);
+            // 
+            // txtLineSymbolStyle
+            // 
+            this.txtLineSymbolStyle.Location = new System.Drawing.Point(376, 24);
+            this.txtLineSymbolStyle.Name = "txtLineSymbolStyle";
+            this.txtLineSymbolStyle.Size = new System.Drawing.Size(177, 21);
+            this.txtLineSymbolStyle.TabIndex = 9;
+            // 
+            // txtLineWidth
+            // 
+            this.txtLineWidth.Location = new System.Drawing.Point(259, 24);
+            this.txtLineWidth.Name = "txtLineWidth";
+            this.txtLineWidth.Size = new System.Drawing.Size(49, 21);
+            this.txtLineWidth.TabIndex = 7;
+            // 
+            // btnLineColor
+            // 
+            this.btnLineColor.Location = new System.Drawing.Point(84, 23);
+            this.btnLineColor.Name = "btnLineColor";
+            this.btnLineColor.Size = new System.Drawing.Size(52, 20);
+            this.btnLineColor.TabIndex = 6;
+            this.btnLineColor.UseVisualStyleBackColor = true;
+            this.btnLineColor.Click += new System.EventHandler(this.btnLineColor_Click_1);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(337, 27);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(33, 12);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Style";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(205, 27);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 12);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Width";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(27, 27);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 12);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "Color";
+            // 
+            // grpFillSymbol
+            // 
+            this.grpFillSymbol.Controls.Add(this.txtFillSymbolStyle);
+            this.grpFillSymbol.Controls.Add(this.txtFillSymbolTransparency);
+            this.grpFillSymbol.Controls.Add(this.btnFillColor);
+            this.grpFillSymbol.Controls.Add(this.label3);
+            this.grpFillSymbol.Controls.Add(this.label2);
+            this.grpFillSymbol.Controls.Add(this.label1);
+            this.grpFillSymbol.Location = new System.Drawing.Point(34, 34);
+            this.grpFillSymbol.Name = "grpFillSymbol";
+            this.grpFillSymbol.Size = new System.Drawing.Size(559, 53);
+            this.grpFillSymbol.TabIndex = 0;
+            this.grpFillSymbol.TabStop = false;
+            this.grpFillSymbol.Text = "Fill Symbol";
+            // 
+            // txtFillSymbolStyle
+            // 
+            this.txtFillSymbolStyle.Location = new System.Drawing.Point(376, 22);
+            this.txtFillSymbolStyle.Name = "txtFillSymbolStyle";
+            this.txtFillSymbolStyle.Size = new System.Drawing.Size(177, 21);
+            this.txtFillSymbolStyle.TabIndex = 10;
+            // 
+            // txtFillSymbolTransparency
+            // 
+            this.txtFillSymbolTransparency.Location = new System.Drawing.Point(259, 22);
+            this.txtFillSymbolTransparency.Name = "txtFillSymbolTransparency";
+            this.txtFillSymbolTransparency.Size = new System.Drawing.Size(49, 21);
+            this.txtFillSymbolTransparency.TabIndex = 4;
+            // 
             // btnFillColor
             // 
             this.btnFillColor.Location = new System.Drawing.Point(84, 22);
@@ -216,63 +239,42 @@ namespace MapPrimeSample
             this.btnFillColor.UseVisualStyleBackColor = true;
             this.btnFillColor.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnLineColor
+            // label3
             // 
-            this.btnLineColor.Location = new System.Drawing.Point(84, 23);
-            this.btnLineColor.Name = "btnLineColor";
-            this.btnLineColor.Size = new System.Drawing.Size(52, 20);
-            this.btnLineColor.TabIndex = 6;
-            this.btnLineColor.UseVisualStyleBackColor = true;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(337, 26);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(33, 12);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Style";
             // 
-            // btnPointColor
+            // label2
             // 
-            this.btnPointColor.Location = new System.Drawing.Point(84, 22);
-            this.btnPointColor.Name = "btnPointColor";
-            this.btnPointColor.Size = new System.Drawing.Size(52, 20);
-            this.btnPointColor.TabIndex = 6;
-            this.btnPointColor.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(156, 26);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(84, 12);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Transparency";
             // 
-            // txtFillSymbolTransparency
+            // label1
             // 
-            this.txtFillSymbolTransparency.Location = new System.Drawing.Point(259, 22);
-            this.txtFillSymbolTransparency.Name = "txtFillSymbolTransparency";
-            this.txtFillSymbolTransparency.Size = new System.Drawing.Size(49, 21);
-            this.txtFillSymbolTransparency.TabIndex = 4;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(27, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Color";
             // 
-            // txtLineWidth
+            // btnApplySimpleRenderer
             // 
-            this.txtLineWidth.Location = new System.Drawing.Point(259, 24);
-            this.txtLineWidth.Name = "txtLineWidth";
-            this.txtLineWidth.Size = new System.Drawing.Size(49, 21);
-            this.txtLineWidth.TabIndex = 7;
-            // 
-            // txtPointSize
-            // 
-            this.txtPointSize.Location = new System.Drawing.Point(259, 21);
-            this.txtPointSize.Name = "txtPointSize";
-            this.txtPointSize.Size = new System.Drawing.Size(49, 21);
-            this.txtPointSize.TabIndex = 7;
-            // 
-            // txtPointSymbolStyle
-            // 
-            this.txtPointSymbolStyle.Location = new System.Drawing.Point(376, 22);
-            this.txtPointSymbolStyle.Name = "txtPointSymbolStyle";
-            this.txtPointSymbolStyle.Size = new System.Drawing.Size(177, 21);
-            this.txtPointSymbolStyle.TabIndex = 8;
-            // 
-            // txtLineSymbolStyle
-            // 
-            this.txtLineSymbolStyle.Location = new System.Drawing.Point(376, 24);
-            this.txtLineSymbolStyle.Name = "txtLineSymbolStyle";
-            this.txtLineSymbolStyle.Size = new System.Drawing.Size(177, 21);
-            this.txtLineSymbolStyle.TabIndex = 9;
-            // 
-            // txtFillSymbolStyle
-            // 
-            this.txtFillSymbolStyle.Location = new System.Drawing.Point(376, 22);
-            this.txtFillSymbolStyle.Name = "txtFillSymbolStyle";
-            this.txtFillSymbolStyle.Size = new System.Drawing.Size(177, 21);
-            this.txtFillSymbolStyle.TabIndex = 10;
+            this.btnApplySimpleRenderer.Location = new System.Drawing.Point(462, 268);
+            this.btnApplySimpleRenderer.Name = "btnApplySimpleRenderer";
+            this.btnApplySimpleRenderer.Size = new System.Drawing.Size(180, 34);
+            this.btnApplySimpleRenderer.TabIndex = 3;
+            this.btnApplySimpleRenderer.Text = "Apply Simple Renderer";
+            this.btnApplySimpleRenderer.UseVisualStyleBackColor = true;
+            this.btnApplySimpleRenderer.Click += new System.EventHandler(this.btnApplySimpleRenderer_Click);
             // 
             // FormSimpleRenderer
             // 
@@ -285,12 +287,12 @@ namespace MapPrimeSample
             this.Text = "FormSimpleRenderer";
             this.Load += new System.EventHandler(this.FormSimpleRenderer_Load);
             this.grpSimpleRenderer.ResumeLayout(false);
-            this.grpFillSymbol.ResumeLayout(false);
-            this.grpFillSymbol.PerformLayout();
-            this.grpLineSymbol.ResumeLayout(false);
-            this.grpLineSymbol.PerformLayout();
             this.grpPointSymbol.ResumeLayout(false);
             this.grpPointSymbol.PerformLayout();
+            this.grpLineSymbol.ResumeLayout(false);
+            this.grpLineSymbol.PerformLayout();
+            this.grpFillSymbol.ResumeLayout(false);
+            this.grpFillSymbol.PerformLayout();
             this.ResumeLayout(false);
 
         }

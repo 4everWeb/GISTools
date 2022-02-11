@@ -83,35 +83,6 @@ namespace MapPrimeSample
             this.txtPointSymbolStyle.Text = symbol.Style.ToString();
         }
 
-        private void btnFillColor_Click(object sender, EventArgs e)
-        {
-            ColorDialog colorDlg = new ColorDialog();
-            colorDlg.Color = this.btnFillColor.BackColor;
-            if (colorDlg.ShowDialog() == DialogResult.OK)
-            {
-                this.btnFillColor.BackColor = colorDlg.Color;
-            }
-        }
-
-        private void btnLineColor_Click(object sender, EventArgs e)
-        {
-            ColorDialog colorDlg = new ColorDialog();
-            colorDlg.Color = this.btnLineColor.BackColor;
-            if (colorDlg.ShowDialog() == DialogResult.OK)
-            {
-                this.btnLineColor.BackColor = colorDlg.Color;
-            }
-        }
-
-        private void btnPointColor_Click(object sender, EventArgs e)
-        {
-            ColorDialog colorDlg = new ColorDialog();
-            colorDlg.Color = this.btnPointColor.BackColor;
-            if (colorDlg.ShowDialog() == DialogResult.OK)
-            {
-                this.btnPointColor.BackColor = colorDlg.Color;
-            }
-        }
 
         private void applyFillSymbol(GDisplayLib.IFillSymbol symbol)
         {
@@ -146,7 +117,12 @@ namespace MapPrimeSample
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            ColorDialog colorDlg = new ColorDialog();
+            colorDlg.Color = this.btnFillColor.BackColor;
+            if (colorDlg.ShowDialog() == DialogResult.OK)
+            {
+                this.btnFillColor.BackColor = colorDlg.Color;
+            }
         }
 
         private void btnApplySimpleRenderer_Click(object sender, EventArgs e)
@@ -180,6 +156,26 @@ namespace MapPrimeSample
 
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void btnLineColor_Click_1(object sender, EventArgs e)
+        {
+            ColorDialog colorDlg = new ColorDialog();
+            colorDlg.Color = this.btnLineColor.BackColor;
+            if (colorDlg.ShowDialog() == DialogResult.OK)
+            {
+                this.btnLineColor.BackColor = colorDlg.Color;
+            }
+        }
+
+        private void btnPointColor_Click_1(object sender, EventArgs e)
+        {
+            ColorDialog colorDlg = new ColorDialog();
+            colorDlg.Color = this.btnPointColor.BackColor;
+            if (colorDlg.ShowDialog() == DialogResult.OK)
+            {
+                this.btnPointColor.BackColor = colorDlg.Color;
+            }
         }
     }
 }
