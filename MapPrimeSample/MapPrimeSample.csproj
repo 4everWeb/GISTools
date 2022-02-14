@@ -87,7 +87,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppGeometry.cs" />
     <Compile Include="EditorInsertObjectTask.cs" />
+    <Compile Include="EditorSplitObjectTask.cs" />
+    <Compile Include="EditorUpdateObjectTask.cs" />
+    <Compile Include="FormEditAttribute.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEditAttribute.Designer.cs">
+      <DependentUpon>FormEditAttribute.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormFeatureLayerDefinition.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +147,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormEditAttribute.resx">
+      <DependentUpon>FormEditAttribute.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormFeatureLayerDefinition.resx">
       <DependentUpon>FormFeatureLayerDefinition.cs</DependentUpon>
     </EmbeddedResource>

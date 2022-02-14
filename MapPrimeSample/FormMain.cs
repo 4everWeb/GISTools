@@ -31,8 +31,6 @@ namespace MapPrimeSample
         public static GControlsLib.IEngineEditor EngineEditor;
         public static GDataSourceLib.IEngineOperationStack EngineOperationStack;
 
-    
-
         public static Color ToColor(uint ucol)
         {
             Color fillColpre = Color.FromArgb((int)ucol);
@@ -735,7 +733,38 @@ namespace MapPrimeSample
 
         private void toolEditAttribute_Click(object sender, EventArgs e)
         {
+            if (FormMain.EngineEditor.EditState != GControlsLib.EngineEditState.eEngineStateEditing)
+            {
+                string errmsg = "편집 상태가 아닙니다. ";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            GLayerLib.IFeatureLayer selectedFeatureLayer = GetSelectedLayer() as GLayerLib.IFeatureLayer;
+            if (selectedFeatureLayer == null)
+            {
+                string errmsg = "선택된 객체가 없습니다. ";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            GLayerLib.IFeatureSelection featureSelection = selectedFeatureLayer as GLayerLib.IFeatureSelection;
+            if (featureSelection.Selection.Count != 1)
+            {
+                string errmsg = "선택된 객체가 2개 이상입니다.";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            GDataSourceLib.IEnumFeature features = featureSelection.SelectedFeatures;
+            features.Reset();
+            GDataSourceLib.Feature selectedFeature = features.Next();
+
+            FormEditAttribute form = new FormEditAttribute(selectedFeature);
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                this.axMapControl1.Refresh(GCommonLib.eViewDrawLayer.eViewDrawLayerAll);
+            }
         }
 
         private void toolEditStart_Click(object sender, EventArgs e)
@@ -877,6 +906,123 @@ namespace MapPrimeSample
 
         }
 
+        private void toolEditSelection_Click(object sender, EventArgs e)
+        {
+            if (FormMain.EngineEditor.EditState != GControlsLib.EngineEditState.eEngineStateEditing)
+            {
+                string errmsg = "편집 상태가 아닙니다. ";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            GControlsLib.IEngineEditTask task = FormMain.EngineEditor.GetTaskByUniqueName("Custom.EditorUpdateObjectTask");
+            if (task == null)
+            {
+                task = new EditorUpdateObjectTask() as GControlsLib.IEngineEditTask;
+                FormMain.EngineEditor.AddTask(task);
+            }
+            FormMain.EngineEditor.CurrentTask = task;
+
+            this.axMapControl1.CurrentTool = _editSelectFeatureTool as GCommonLib.Tool;
+        }
+
+        private void toolSplitObject_Click(object sender, EventArgs e)
+        {
+            if (FormMain.EngineEditor.EditState != GControlsLib.EngineEditState.eEngineStateEditing)
+            {
+                string errmsg = "편집 상태가 아닙니다. ";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            GLayerLib.IFeatureLayer selectedFeatureLayer = GetSelectedLayer() as GLayerLib.IFeatureLayer;
+            if (selectedFeatureLayer == null)
+            {
+                string errmsg = "선택된 객체가 없습니다. ";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            GControlsLib.IEngineEditTask task = FormMain.EngineEditor.GetTaskByUniqueName("Custom.EditorSplitObjectTask");
+            if (task == null)
+            {
+                task = new EditorSplitObjectTask() as GControlsLib.IEngineEditTask;
+                FormMain.EngineEditor.AddTask(task);
+            }
+            FormMain.EngineEditor.CurrentTask = task;
+
+            this.axMapControl1.CurrentTool = this.axMapControl1.CurrentTool = _editNewLineTool as GCommonLib.Tool;
+        }
+
+        private void toolMergeObject_Click(object sender, EventArgs e)
+        {
+            if (FormMain.EngineEditor.EditState != GControlsLib.EngineEditState.eEngineStateEditing)
+            {
+                string errmsg = "편집 상태가 아닙니다. ";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            GLayerLib.IFeatureLayer selectedFeatureLayer = GetSelectedLayer() as GLayerLib.IFeatureLayer;
+            if (selectedFeatureLayer == null)
+            {
+                string errmsg = "선택된 객체가 없습니다. ";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            List<GGeometryLib.IGeometry> srcGeomList = new List<GGeometryLib.IGeometry>();
+
+            GLayerLib.IFeatureSelection featureSelection = selectedFeatureLayer as GLayerLib.IFeatureSelection;
+            GDataSourceLib.IEnumFeature features = featureSelection.SelectedFeatures;
+
+            {
+                features.Reset();
+                GDataSourceLib.Feature feature = features.Next();
+                while (feature != null)
+                {
+                    srcGeomList.Add(feature.Geometry);
+                    feature = features.Next();
+                }
+            }
+
+            if (srcGeomList.Count < 2)
+            {
+                string errmsg = "2개 이상의 선택된 객체가 없습니다. ";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            GGeometryLib.IGeometry unionGeom = AppGeometry.MakeUnion(srcGeomList);
+            if (unionGeom == null)
+            {
+                string errmsg = "객체병합 실패 ";
+                MessageBox.Show(errmsg, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string grpID;
+            FormMain.EngineOperationStack.StartGroup("Union", out grpID);
+
+            {
+                features.Reset();
+                GDataSourceLib.Feature feature = features.Next();
+                while (feature != null)
+                {
+                    feature.Delete();
+                    feature = features.Next();
+                }
+            }
+
+            GDataSourceLib.Feature newFeature = selectedFeatureLayer.FeatureClass.CreateFeature();
+            newFeature.Geometry = unionGeom;
+            selectedFeatureLayer.FeatureClass.InsertFeature(newFeature);
+
+            FormMain.EngineOperationStack.StopGroup();
+
+            featureSelection.Selection.Clear();
+            this.axMapControl1.Refresh(GCommonLib.eViewDrawLayer.eViewDrawLayerAll);
+        }
     }
 }
 

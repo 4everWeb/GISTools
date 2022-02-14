@@ -145,7 +145,7 @@
             this.axMapControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.axMapControl1.Name = "axMapControl1";
             this.axMapControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControl1.OcxState")));
-            this.axMapControl1.Size = new System.Drawing.Size(363, 576);
+            this.axMapControl1.Size = new System.Drawing.Size(363, 578);
             this.axMapControl1.TabIndex = 0;
             this.axMapControl1.OnMouseUp += new AxGMapLib.IMapControlEvents_OnMouseUpEventHandler(this.axMapControl_OnMouseUp);
             // 
@@ -389,7 +389,7 @@
             // 
             this.splitContainer5.Panel2.Controls.Add(this.tabControl6);
             this.splitContainer5.Size = new System.Drawing.Size(379, 756);
-            this.splitContainer5.SplitterDistance = 608;
+            this.splitContainer5.SplitterDistance = 610;
             this.splitContainer5.SplitterWidth = 3;
             this.splitContainer5.TabIndex = 2;
             // 
@@ -401,7 +401,7 @@
             this.tabControl3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(377, 606);
+            this.tabControl3.Size = new System.Drawing.Size(377, 608);
             this.tabControl3.TabIndex = 1;
             // 
             // tabPageMapView
@@ -411,7 +411,7 @@
             this.tabPageMapView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageMapView.Name = "tabPageMapView";
             this.tabPageMapView.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPageMapView.Size = new System.Drawing.Size(369, 580);
+            this.tabPageMapView.Size = new System.Drawing.Size(369, 582);
             this.tabPageMapView.TabIndex = 1;
             this.tabPageMapView.Text = "지도화면";
             this.tabPageMapView.UseVisualStyleBackColor = true;
@@ -424,7 +424,7 @@
             this.tabControl6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl6.Name = "tabControl6";
             this.tabControl6.SelectedIndex = 0;
-            this.tabControl6.Size = new System.Drawing.Size(377, 143);
+            this.tabControl6.Size = new System.Drawing.Size(377, 141);
             this.tabControl6.TabIndex = 0;
             // 
             // tabPage4
@@ -434,7 +434,7 @@
             this.tabPage4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage4.Size = new System.Drawing.Size(369, 117);
+            this.tabPage4.Size = new System.Drawing.Size(369, 115);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "선택 객체";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -449,7 +449,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(363, 113);
+            this.dataGridView1.Size = new System.Drawing.Size(363, 111);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -847,6 +847,7 @@
             this.toolEditSelection.Name = "toolEditSelection";
             this.toolEditSelection.Size = new System.Drawing.Size(111, 24);
             this.toolEditSelection.Text = "객체선택(편집)";
+            this.toolEditSelection.Click += new System.EventHandler(this.toolEditSelection_Click);
             // 
             // toolSplitObject
             // 
@@ -855,6 +856,7 @@
             this.toolSplitObject.Name = "toolSplitObject";
             this.toolSplitObject.Size = new System.Drawing.Size(79, 24);
             this.toolSplitObject.Text = "객체분할";
+            this.toolSplitObject.Click += new System.EventHandler(this.toolSplitObject_Click);
             // 
             // toolMergeObject
             // 
@@ -863,6 +865,7 @@
             this.toolMergeObject.Name = "toolMergeObject";
             this.toolMergeObject.Size = new System.Drawing.Size(79, 24);
             this.toolMergeObject.Text = "객체병합";
+            this.toolMergeObject.Click += new System.EventHandler(this.toolMergeObject_Click);
             // 
             // toolEditAttribute
             // 
