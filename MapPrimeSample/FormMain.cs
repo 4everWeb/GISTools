@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -175,15 +176,9 @@ namespace MapPrimeSample
 
         }
 
-        private void listBoxFeatureClass_SelectedIndexChanged(object sender, EventArgs e)
-        {
+  
 
-        }
-
-        private void listBoxFeatureClass_DoubleClick(object sender, EventArgs e)
-        {
-
-        }
+     
 
         private GLayerLib.IGeoFeatureLayer gfLayer = null;
         //레이어목록 배경색 변경
@@ -390,10 +385,6 @@ namespace MapPrimeSample
             this.axMapControl1.Refresh(GCommonLib.eViewDrawLayer.eViewDrawLayerGeoSelection);
         }
 
-        private void btnConnectionGISServer_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnOpenShapeDataSource_Click(object sender, EventArgs e)
         {
@@ -1021,6 +1012,113 @@ namespace MapPrimeSample
             FormMain.EngineOperationStack.StopGroup();
 
             featureSelection.Selection.Clear();
+            this.axMapControl1.Refresh(GCommonLib.eViewDrawLayer.eViewDrawLayerAll);
+        }
+
+        //gis서버연결
+        private GDataSourceLib.IDataSource OpenServerDataSource(string server, int port, string user, string password)
+        {
+            try
+            {
+                GCommonLib.Properties prop = new GCommonLib.Properties();
+                prop.SetProperty("SERVER", server);
+                prop.SetProperty("PORT", port);
+                prop.SetProperty("USER", user);
+
+                byte[] srcBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(password);
+                byte[] saltBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(user);
+                System.Security.Cryptography.HashAlgorithm sha256 = new System.Security.Cryptography.SHA256CryptoServiceProvider();
+                byte[] combined = saltBytes.Concat(srcBytes).ToArray();
+                byte[] hashed = sha256.ComputeHash(combined);
+                string password_sha256 = Convert.ToBase64String(hashed);
+                prop.SetProperty("PASSWORD", password_sha256);
+
+                string applicationname = server + ":" + port.ToString() + "(" + user + ")";
+                prop.SetProperty("APPLICATIONNAME", applicationname);
+
+                GDataSourceLib.IDataSource dataSource = (GDataSourceLib.IDataSource)new GDataSourceLib.MapPrimeDataSource();
+                bool bIsSuccess = dataSource.Open(prop);
+                if (bIsSuccess == false)
+                    throw new ArgumentException("연결실패");
+
+                return dataSource;
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("연결실패");
+            }
+        }
+
+        private void btnConnectionGISServer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.listBoxFeatureClass.Items.Clear();
+
+                string server = this.txtHost.Text.Trim();
+                Int32 port = Convert.ToInt32(this.txtPort.Text.Trim());
+                string user = this.txtUserID.Text.Trim();
+                string password = this.txtPassword.Text.Trim();
+
+                GDataSourceLib.IDataSource dataSource = OpenServerDataSource(server, port, user, password);
+                if (dataSource == null)
+                    throw new ArgumentException("연결실패");
+                else
+                {
+                    this.btnConnectionGISServer.Tag = dataSource;
+
+                    GDataSourceLib.IDataSource2 ds2 = dataSource as GDataSourceLib.IDataSource2;
+                    var dsNames = ds2.DatasetNames[GDataSourceLib.eDatasetType.eDatasetTypeFeatureClass];
+                    string[] sarr = dsNames as string[];
+
+                    for (int i = 0; i < sarr.Length; i++)
+                    {
+                        this.listBoxFeatureClass.Items.Add(sarr[i]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private GDataSourceLib.IFeatureClass openFeatureClass2(GDataSourceLib.IDataSource dataSource, string className)
+        {
+            GDataSourceLib.IFeatureClass featureClass = dataSource.OpenFeatureClass(className);
+            if (featureClass == null)
+                throw new ArgumentException("featureClass == null");
+
+            return featureClass;
+        }
+
+        private GLayerLib.IFeatureLayer createFeatureLayer2(GDataSourceLib.IFeatureClass featureClass, string layerName)
+        {
+            GLayerLib.IFeatureLayer newFeatureLayer = new GLayerLib.FeatureLayer();
+            newFeatureLayer.FeatureClass = featureClass;
+            newFeatureLayer.Name = layerName;
+            newFeatureLayer.LayerID = Guid.NewGuid().ToString();
+            newFeatureLayer.MinimumScale = 0.0;
+            newFeatureLayer.MaximumScale = 1000000000000;
+            return newFeatureLayer;
+        }
+
+
+        private void listBoxFeatureClass_DoubleClick(object sender, EventArgs e)
+        {
+            string className = this.listBoxFeatureClass.SelectedItem.ToString();
+            Debug.WriteLine(className);
+            if (className == null) { 
+                return;
+            }
+            GDataSourceLib.IDataSource2 dataSource = this.btnConnectionGISServer.Tag as GDataSourceLib.IDataSource2;
+
+            GDataSourceLib.IFeatureClass featureClass = openFeatureClass2(dataSource, className);
+
+            string layerName = className;
+            GLayerLib.IFeatureLayer featureLayer = createFeatureLayer2(featureClass, layerName);
+
+            this.axMapControl1.AddLayer(featureLayer);
             this.axMapControl1.Refresh(GCommonLib.eViewDrawLayer.eViewDrawLayerAll);
         }
     }
